@@ -1,11 +1,21 @@
 const path  =  require('path');
 
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+
+const htmlWebpackPlugin = require('html-webpack-plugin');
+//热模块加载
+const webpack = require('webpack');
 
 module.exports = {
-  mode:'development',
+  mode:'production',
   // 打包入口
   entry:path.join(__dirname,'src/main.js'),
+  devtool:'eval',  //建立打包后的文件和源代码所在行的映射，开发中快速定位到出错的源代码行
+  devServer:{
+    contentBase:'./dist',
+    open:true,
+    hot:true, //热模块加载
+  },
   //打包出口 
   output:{
     filename:'bundle.js',
@@ -30,12 +40,18 @@ module.exports = {
         test:/\.css$/,
         // css-loader  解决文件之间的依赖关系，把所有的css文件打包成一个文件
         // style-loader 将css-loader 打包完成后生成的文件挂载到页面的header标签中的style中
-        use:['style-loader','css-loader'],  
+        use:['style-loader','css-loader','postcss-loader'],  
       }
     ]
   },
   plugins:[
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new htmlWebpackPlugin({
+      template:'./index.html'
+    }),
+    //热模块加载
+    new webpack.HotModuleReplacementPlugin()
+
   ],
   resolve:{
     alias:{

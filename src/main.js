@@ -13,3 +13,5 @@ new Vue({
   },
   template:'<App/>'
 })
+
+// consolel.log('test')
