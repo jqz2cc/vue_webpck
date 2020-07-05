@@ -15,5 +15,5 @@ new Vue({
 })
 
 // consolel.log('test')
-const arr= [1,2,3].map(item=>item+1)
-console.error(arr);
+// const arr= [1,2,3].map(item=>item+1)
+// console.error(arr);

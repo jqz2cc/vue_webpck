@@ -29,10 +29,10 @@ module.exports = {
           limit:2048,
         }
       },{
-        test:/\.css$/,
+        test:/\.less$/,
         // css-loader  解决文件之间的依赖关系，把所有的css文件打包成一个文件
         // style-loader 将css-loader 打包完成后生成的文件挂载到页面的header标签中的style中
-        use:['style-loader','css-loader','postcss-loader'],  
+        use:['style-loader','css-loader','less-loader'],  
       },{
         test:/\.js$/,
         exclude:/node-modules/,
@@ -50,7 +50,9 @@ module.exports = {
   ],
   resolve:{
     alias:{
-      'vue':"vue/dist/vue.js"
+      'vue':"vue/dist/vue.js",
+      '@':path.resolve(__dirname,'../src'),
+      'style':path.resolve(__dirname,'../src/assets/style')
     }
   }
 }
